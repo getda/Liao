@@ -1,0 +1,8 @@
+/.idea
+/.vscode
+/vendor
+*.log
+config/.env.php
+/tests/tmp
+/tests/.phpunit.result.cache
+/phinx

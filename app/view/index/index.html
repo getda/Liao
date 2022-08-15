@@ -1,0 +1,22 @@
+{extend name="layouts/app" /}
+
+{block name="title"}即将进入聊天室...{/block}
+
+{block name="content"}
+<div class="d-flex align-items-center justify-content-center" style="height: 100vh;" x-data="data()">
+    <div class="row">
+        <div class="col-12">
+            <input type="text" required x-model="form.nickname" class="form-control form-control-lg rounded-top" placeholder="输入昵称"
+                   value="{:request()->cookie('nickname')}" style="border-radius: 0;"/>
+            <input type="password" required x-model="form.password" x-on:keydown.enter="join()" class="form-control form-control-lg rounded-bottom"
+                   placeholder="口令，用于每次进入时验证身份" style="border-radius: 0;border-top: 0;"/>
+        </div>
+        <div class="col-12 mt-2 d-grid gap-2">
+            <button class="btn btn-primary" type="button" x-on:click="join()">进入聊天室</button>
+        </div>
+    </div>
+</div>
+{/block}
+{block name="script-link"}
+<script src="/static/js/index.js"></script>
+{/block}

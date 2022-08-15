@@ -1,0 +1,94 @@
+{extend name="layouts/app" /}
+
+{block name="title"}欢迎{$user.name}来到{$chatroomName}{/block}
+
+{block name="style"}
+<style>
+    @media (max-width: 576px) {
+        .width-auto {
+            width: auto !important;
+        }
+    }
+    .width-auto {
+        width: 100%;
+    }
+</style>
+{/block}
+
+{block name="content"}
+    <div class="d-flex justify-content-center mx-0" style="height: 100vh;" x-data="data()" x-init="init()">
+        <div class="row border px-0 width-auto">
+            <div class="col align-self-start px-0">
+                <div class="row justify-content-between bg-light p-2 mx-0">
+                    <div class="col">
+                        <!--<button class="btn btn-primary" x-on:click="roomInfoShow = !roomInfoShow">房间信息</button>-->
+                        <!--<ul class="dropdown-menu" :class="{ 'show' : roomInfoShow}" @click.away="roomInfoShow = false">-->
+                        <!--    <li class="dropdown-item">-->
+                        <!--        <strong>总在线人数：</strong><span x-model="roomInfo.online" x-text="roomInfo.online"></span>-->
+                        <!--    </li>-->
+                        <!--    <li class="dropdown-item">-->
+                        <!--        <strong>房间在线人数：</strong><span x-model="roomInfo.roomOnline" x-text="roomInfo.roomOnline"></span>-->
+                        <!--    </li>-->
+                        <!--</ul>-->
+                    </div>
+                    <div class="col d-flex align-self-center justify-content-center">{$chatroomName}</div>
+                    <div class="col d-flex justify-content-end">
+                        <form action="{:route('logout')}" method="POST">
+                            <button class="btn btn-danger" type="submit">退出</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="overflow-auto" id="message-box" style="max-height: 82vh;">
+                    <div class="row px-2 mx-0">
+                        <template  x-for="(item, index) in messageBox" :key="index">
+                            <div>
+                                <div class="d-flex justify-content-end">
+                                    <template x-if="item.uid == uid">
+                                        <div class="col-8 col-md-4">
+                                            <div class="mb-1" style="font-size: 13px;text-align: right;">
+                                                [ <span x-text="item.send_time"></span> ]
+                                                <span x-text="item.nickname"></span>
+                                            </div>
+                                            <div class="d-flex justify-content-end">
+                                                <div class="alert alert-info p-2 d-inline-flex" x-text="item.content"></div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                                <div class="d-flex justify-content-start">
+                                    <template x-if="item.uid != uid">
+                                        <div class="col-8 col-md-4">
+                                            <div class="mb-1" style="font-size: 13px;">
+                                                <span x-text="item.nickname"></span>
+                                                [ <span x-text="item.send_time"></span> ]
+                                            </div>
+                                            <div class="alert alert-warning p-2 d-inline-flex" x-text="item.content"></div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </div>
+                        </template >
+                    </div>
+                </div>
+            </div>
+            <div class="col align-self-end flex-fill mb-2">
+                <div class="input-group">
+                    <input type="text" id="message" class="form-control" x-model="message" x-on:keydown.enter="sendMessage()" placeholder="输入内容...">
+                    <button class="btn btn-outline-primary" x-on:click="sendMessage()" type="button">发送</button>
+                </div>
+                <p class="text-muted my-1 text-center" style="font-size: small;">
+                    <span class="text-danger text-bold">*</span>
+                    请勿发送违法违规内容。文明交谈，尊重他人，谢谢!
+                </p>
+                <p class="text-muted my-1 text-center" style="font-size: small;">
+                    <span class="text-danger text-bold">注：</span>
+                    每个房间仅保存1小时内的聊天记录！
+                </p>
+            </div>
+        </div>
+    </div>
+{/block}
+
+{block name="script-link"}
+<script src="/static/js/chatroom.js"></script>
+{/block}
