@@ -21,4 +21,5 @@ return [
     'public_path' => base_path() . DIRECTORY_SEPARATOR . 'public',
     'runtime_path' => base_path(false) . DIRECTORY_SEPARATOR . 'runtime',
     'controller_suffix' => '',
+    'frontend_websocket_url' => envs('FRONTEND_WEBSOCKET_URL', 'ws://127.0.0.1:8282')
 ];

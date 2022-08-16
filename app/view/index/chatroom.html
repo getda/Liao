@@ -90,5 +90,8 @@
 {/block}
 
 {block name="script-link"}
+<script>
+    const WEBSOCKET_URL = "{:config('app.frontend_websocket_url')}";
+</script>
 <script src="/static/js/chatroom.js"></script>
 {/block}

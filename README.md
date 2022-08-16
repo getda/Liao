@@ -20,11 +20,13 @@ composer install
 |--------------------------------------------------------------------------
 */
 $app = [
-    'DEBUG'            => false,
-    // web 服务
-    'SERVER_LISTEN'    => "http://0.0.0.0:8787",
-    // socket 服务
-    'WEBSOCKET_LISTEN' => "websocket://0.0.0.0:8282",
+    'DEBUG'                  => false,
+    // WEB 服务
+    'SERVER_LISTEN'          => "http://0.0.0.0:8787",
+    // WEBSOCKET 服务
+    'WEBSOCKET_LISTEN'       => "websocket://0.0.0.0:8282",
+    // WEBSCOKET 连接地址，用于前台
+    'FRONTEND_WEBSOCKET_URL' => "ws://127.0.0.1:8282",
 ];
 
 /*

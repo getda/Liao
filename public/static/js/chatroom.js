@@ -24,7 +24,7 @@ const data = function () {
         init() {
             this.uid = Cookies.get('uid');
             this.identity = Cookies.get('identity');
-            this.websocket = new WebSocket(`ws://${window.location.hostname}:10033?uid=${this.uid}&identity=${this.identity}&room=${this.room}`);
+            this.websocket = new WebSocket(`${WEBSOCKET_URL}?uid=${this.uid}&identity=${this.identity}&room=${this.room}`);
             let pingTimer = this.ping();
 
             this.websocket.onopen = (event) => {
