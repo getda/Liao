@@ -13,7 +13,7 @@
  */
 
 return [
-    'listen'           => envs('SERVER_LISTEN', 'http://0.0.0.0:10032'),
+    'listen'           => envs('SERVER_LISTEN', 'http://0.0.0.0:8787'),
     'transport'        => 'tcp',
     'context'          => [],
     'name'             => 'webman',
