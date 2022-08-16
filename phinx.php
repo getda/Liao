@@ -1,4 +1,5 @@
 <?php
+$config = @include config_path()."/.env.php";
 
 return [
     'paths'         => [
@@ -7,43 +8,16 @@ return [
     ],
     'environments'  => [
         'default_migration_table' => 'phinxlog',
-        'default_environment'     => 'development',
-        'production'              => [
+        'default_environment'     => 'default',
+        'default'              => [
             'adapter' => 'mysql',
-            'host'    => 'localhost',
-            'name'    => 'liao_test',
-            'user'    => 'liao_test',
-            'pass'    => '2HWNKwXiHdT5eGw3',
-            'port'    => '3306',
+            'host'    => $config['DB_HOST'] ?? '127.0.0.1',
+            'name'    => $config['DB_DATABASE'] ?? 'test',
+            'user'    => $config['DB_USERNAME'] ?? 'root',
+            'pass'    => $config['DB_PASSWORD'] ?? 'root',
+            'port'    => $config['DB_PORT'] ?? '3306',
             'charset' => 'utf8mb4',
-        ],
-        // 'development'             => [ // 家
-        //     "adapter" => 'mysql',
-        //     "host"    => '127.0.0.1',
-        //     "name"    => 'liao',
-        //     "user"    => 'root',
-        //     "pass"    => 'root',
-        //     "port"    => '3306',
-        //     "charset" => "utf8mb4",
-        // ],
-        'development'             => [
-            "adapter" => 'mysql',
-            "host"    => '127.0.0.1',
-            "name"    => 'liao',
-            "user"    => 'xiaoda',
-            "pass"    => '123',
-            "port"    => '3306',
-            "charset" => "utf8mb4",
-        ],
-        'testing'                 => [
-            'adapter' => 'mysql',
-            'host'    => 'localhost',
-            'name'    => 'testing_db',
-            'user'    => 'root',
-            'pass'    => '',
-            'port'    => '3306',
-            'charset' => 'utf8mb4',
-        ],
+        ]
     ],
     'version_order' => 'creation',
 ];

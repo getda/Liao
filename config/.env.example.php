@@ -36,4 +36,4 @@ $redis = [
     'REDIS_PASSWORD' => null,
 ];
 
-return array_merge($app, $database);
+return array_merge($app, $database, $redis);
