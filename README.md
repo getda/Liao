@@ -69,3 +69,6 @@ php start.php start -d
 
 5. 配置域名
 > 见：[https://www.workerman.net/doc/webman/others/nginx-proxy.html](https://www.workerman.net/doc/webman/others/nginx-proxy.html)
+
+### 更多说明
+本项目基于 [webman](https://www.workerman.net/webman) 开发，仅用于测试学习参考。
