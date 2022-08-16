@@ -3,6 +3,11 @@
 * PHP 7.4+ 
 * Mysql 5.7+
 * Redis
+
+### 预览效果
+![Login](https://raw.githubusercontent.com/getda/Liao/main/preview/login.png)
+![Chat](https://raw.githubusercontent.com/getda/Liao/main/preview/chat.png)
+
 ### 部署说明
 1. 克隆代码并安装扩展
 ```shell
