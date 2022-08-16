@@ -56,11 +56,8 @@ class Events
     public static function onMessage($clientId, $message)
     {
         $data = json_decode($message, true);
-        if (is_null($data) || !isset($data['type'])) {
-            Log::info("不合规的数据：{$message}");
-            return;
-        }
-        if ($class = config("message-class.{$data['type']}")) {
+        $type = $data['type'] ?? 'no';
+        if ($class = config("message-class.{$type}")) {
             try {
                 $user = Gateway::getSession($clientId);
                 $message = new MessageProcessing(new $class(), $clientId, $data);
