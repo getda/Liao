@@ -44,8 +44,9 @@ class IndexController
         if ($user && !$user->checkPassword($data['password'])) {
             return send_message("口令错误啦~");
         }
+        // 判断是否在线
         if (Gateway::isUidOnline($user->id)) {
-            return send_message("当前账号已经在线啦，请切换账号重试！");
+            return send_message("当前账号已经在线啦，请换个账号试试！");
         }
         $userId = $user->id;
         $authKey = $user->authKey();

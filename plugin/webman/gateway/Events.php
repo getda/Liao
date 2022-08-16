@@ -16,12 +16,22 @@ class Events
 {
     public static function onConnect($clientId)
     {
-
     }
 
     public static function onWebSocketConnect($clientId, $data)
     {
         $getData = $data['get'];
+        // 重复上线验证
+        if (count(Gateway::getClientIdByUid($getData['uid'])) > 0) {
+            Gateway::sendToClient($clientId, json_encode([
+                'msg' => "当前账号已经在线啦，请换个账号试试！",
+                'status' => 401,
+                'type' => WebSocketMsgType::ERROR
+            ], JSON_UNESCAPED_UNICODE));
+            // 延迟一秒断开链接
+            sleep(1);
+            return Gateway::closeClient($clientId);
+        }
         // 验证 Auth
         try {
             $user = static::checkAuth($clientId, $getData);
