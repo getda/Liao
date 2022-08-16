@@ -1,6 +1,6 @@
 ### Liao
 #### 环境
-* PHP 7.4+ 
+* PHP 8.0+ 
 * Mysql 5.7+
 * Redis
 

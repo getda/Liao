@@ -28,10 +28,8 @@ const data = function () {
             let pingTimer = this.ping();
 
             this.websocket.onopen = (event) => {
-                console.log("与服务器建立链接成功！");
             }
             this.websocket.onmessage = (data) => {
-                console.log("接收到来自服务器的消息：", data);
                 let dataJson = this.parseJson(data.data);
                 // 处理消息内容
                 this.handle(dataJson);
@@ -73,10 +71,8 @@ const data = function () {
              * @returns {boolean}
              */
             privateObject.auth = () => {
-                if (data.code === 401) {
-                    Message.error("授权验证失败！");
-                    return false;
-                }
+                Message.error("授权验证失败！");
+                return false;
             };
 
             /**
@@ -98,7 +94,7 @@ const data = function () {
              * 初始化消息内容
              */
             privateObject.init = () => {
-                if (data.code === 0 && data.list.length > 0) {
+                if (data && Array.isArray(data.list) && data.list.length > 0) {
                     data.list.map(item => {
                         let itemArray = this.parseJson(item);
                         itemArray && this.messageBox.push({
@@ -108,8 +104,8 @@ const data = function () {
                             send_time: itemArray.send_time
                         });
                     });
+                    this.scrollBottom();
                 }
-                this.scrollBottom();
             };
 
             /**
@@ -155,7 +151,7 @@ const data = function () {
             let element = document.getElementById("message-box");
             setTimeout(() => {
                 element.scrollTop = element.scrollHeight + 150;
-            }, 10);
+            }, 20);
         }
     };
 }

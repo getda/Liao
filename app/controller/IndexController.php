@@ -31,6 +31,13 @@ class IndexController
         return view('index/index');
     }
 
+    /**
+     * 加入房间
+     * Author 王小大 [m@wangxiaoda.com]
+     * DateTime 2022/8/17 7:03
+     * @param  Request  $request
+     * @return \support\Response
+     */
     public function join(Request $request)
     {
         $data = $request->post();

@@ -21,12 +21,12 @@ class Events
     public static function onWebSocketConnect($clientId, $data)
     {
         $getData = $data['get'];
+        $uid = $getData['uid'] ?? null;
         // 重复上线验证
-        if (count(Gateway::getClientIdByUid($getData['uid'])) > 0) {
+        if (count(Gateway::getClientIdByUid($uid)) > 0) {
             Gateway::sendToClient($clientId, json_encode([
-                'msg' => "当前账号已经在线啦，请换个账号试试！",
-                'status' => 401,
-                'type' => WebSocketMsgType::ERROR
+                'msg'  => "当前账号已经在线啦，请换个账号试试！",
+                'type' => WebSocketMsgType::ERROR,
             ], JSON_UNESCAPED_UNICODE));
             // 延迟一秒断开链接
             sleep(1);
@@ -37,11 +37,11 @@ class Events
             $user = static::checkAuth($clientId, $getData);
         } catch (WebSocketAuthenticationException $exception) {
             Gateway::sendToClient($exception->clientId, json_encode([
-                'msg' => "权限验证失败！",
-                'status' => 401,
-                'type' => WebSocketMsgType::AUTH
+                'msg'  => $exception->getMessage(),
+                'type' => WebSocketMsgType::AUTH,
             ], JSON_UNESCAPED_UNICODE));
-            // 断开链接
+            // 延迟一秒断开链接
+            sleep(1);
             return Gateway::closeClient($clientId);
         }
         // 下放聊天记录
@@ -89,7 +89,7 @@ class Events
         $identity = $data['identity'] ?? null;
         $room = $data['room'] ?? 1;
 
-        throw_if(blank($uid) || blank($identity), new WebSocketAuthenticationException("缺少身份验证参数"));
+        throw_if(blank($uid) || blank($identity), new WebSocketAuthenticationException($clientId, "缺少身份验证参数！"));
 
         $user = User::checkIdentityByUid($uid, $identity);
 

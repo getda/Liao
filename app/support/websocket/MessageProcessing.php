@@ -26,7 +26,6 @@ class MessageProcessing
     {
         return json_encode(array_merge([
             'type' => $this->data['type'],
-            'code' => 0,
         ], $this->message->send()), JSON_UNESCAPED_UNICODE);
     }
 }
