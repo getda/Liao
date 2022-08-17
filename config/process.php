@@ -34,9 +34,7 @@ return [
             ],
         ],
     ],
-    // 'liao_websocket' => [
-    //     'handler' => process\LiaoWebSocket::class,
-    //     'listen'  => 'websocket://0.0.0.0:10033',
-    //     'count'   => 1,
-    // ],
+    'crontab' => [
+        'handler' => process\Task::class,
+    ],
 ];

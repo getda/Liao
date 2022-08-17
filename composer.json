@@ -38,7 +38,8 @@
     "topthink/think-validate": "^2.0",
     "symfony/cache": "^5.0",
     "webman/gateway-worker": "^1.0",
-    "ext-json": "*"
+    "ext-json": "*",
+    "workerman/crontab": "^1.0"
   },
   "suggest": {
     "ext-event": "For better performance. "
